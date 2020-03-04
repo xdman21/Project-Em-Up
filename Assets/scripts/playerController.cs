@@ -15,7 +15,7 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.W) && this.transform.position.y < 1.158488f) 
+        if(Input.GetKey(KeyCode.W) && this.transform.position.y < -1.592938) 
 		{
 			this.transform.Translate(new Vector3(0,1,1.2f) * Time.deltaTime * speed);
 		}
