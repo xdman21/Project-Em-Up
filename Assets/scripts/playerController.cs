@@ -60,7 +60,6 @@ public class playerController : MonoBehaviour
             speed = 2;
         }
             
-
         //ANIMATION
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
@@ -83,6 +82,7 @@ public class playerController : MonoBehaviour
 				playerHitNormal.SetActive(true);
 			}
 		}
+        //HIT 
 		if(Input.GetKey(KeyCode.Mouse0)) 
 		{
 			hitting = true;
@@ -92,6 +92,7 @@ public class playerController : MonoBehaviour
 			hitting = false;
 			playerHitNormal.SetActive(false);
 		}
+        //RUN
 		if(Input.GetKey(KeyCode.LeftShift)) 
 		{
 			speed = 4;
