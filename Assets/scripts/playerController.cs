@@ -6,8 +6,10 @@ public class playerController : MonoBehaviour
 {
     public float speed = 2;
     public Camera Cam2d;
+	public bool hitting;
 	public GameObject playerIdle;
 	public GameObject playerMove;
+	public GameObject playerHitNormal;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class playerController : MonoBehaviour
 
     void playerMovement()
     {
+		if(hitting == false) 
+		{
         if (Input.GetKey(KeyCode.W) && this.transform.position.y < -1f)
         {
             this.transform.Translate(new Vector3(0, 1, 1.2f) * Time.deltaTime * speed);
@@ -39,7 +43,7 @@ public class playerController : MonoBehaviour
             this.transform.Translate(new Vector3(0, -1, -1.2f) * Time.deltaTime * speed);
 
         }
-        if (Input.GetKey(KeyCode.D) && Cam2d.WorldToScreenPoint(this.transform.position).x < 950)
+        if (Input.GetKey(KeyCode.D) && Cam2d.WorldToScreenPoint(this.transform.position).x < 1050)
         {
             this.transform.Translate(Vector3.right * Time.deltaTime * speed);
             //SPRITE ROTATION RIGHT
@@ -68,6 +72,34 @@ public class playerController : MonoBehaviour
             playerIdle.SetActive(true);
             playerMove.SetActive(false);
         }
+		}
+		else 
+		{
+			if(Input.GetKey(KeyCode.Mouse0)) 
+			{
+				playerHitNormal.transform.rotation = playerMove.transform.rotation;
+				playerIdle.SetActive(false);
+				playerMove.SetActive(false);
+				playerHitNormal.SetActive(true);
+			}
+		}
+		if(Input.GetKey(KeyCode.Mouse0)) 
+		{
+			hitting = true;
+		}
+		else 
+		{
+			hitting = false;
+			playerHitNormal.SetActive(false);
+		}
+		if(Input.GetKey(KeyCode.LeftShift)) 
+		{
+			speed = 4;
+		}
+		else 
+		{
+			speed = 2;
+		}
     }
 
 }
