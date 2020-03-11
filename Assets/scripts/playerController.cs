@@ -5,11 +5,15 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     public float speed = 2;
+    public float timerdamage;
+    public int life;
     public Camera Cam2d;
 	public bool hitting;
+    public bool damage;
 	public GameObject playerIdle;
 	public GameObject playerMove;
 	public GameObject playerHitNormal;
+    public GameObject playerReceivesDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +29,7 @@ public class playerController : MonoBehaviour
 
     void playerMovement()
     {
-		if(hitting == false) 
+		if(hitting == false && damage == false) 
 		{
         if (Input.GetKey(KeyCode.W) && this.transform.position.y < -1f)
         {
@@ -72,7 +76,7 @@ public class playerController : MonoBehaviour
             playerMove.SetActive(false);
         }
 		}
-		else 
+		else if(damage == false)
 		{
 			if(Input.GetKey(KeyCode.Mouse0)) 
 			{
@@ -82,6 +86,28 @@ public class playerController : MonoBehaviour
 				playerHitNormal.SetActive(true);
 			}
 		}
+        else
+        {
+            timerdamage -= Time.deltaTime;
+            if(timerdamage <= 0)
+            {
+                life -= 10;
+                playerReceivesDamage.SetActive(false);
+                timerdamage = 1;
+                damage = false;
+            }
+            else
+            {
+                playerIdle.SetActive(false);
+                playerMove.SetActive(false);
+                playerHitNormal.SetActive(false);
+                playerReceivesDamage.SetActive(true);
+            }
+        }
+        if(life <= 0)
+        {
+            //playerDeath
+        }
         //HIT 
 		if(Input.GetKey(KeyCode.Mouse0)) 
 		{
